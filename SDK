@@ -1,0 +1,7 @@
+  apiKey: "AIzaSyDvEuGTs7hE6q0y2QVLsgWiL3EAbinxr6E",
+  authDomain: "journal-advisor.firebaseapp.com",
+  projectId: "journal-advisor",
+  storageBucket: "journal-advisor.firebasestorage.app",
+  messagingSenderId: "218129240435",
+  appId: "1:218129240435:web:d4c66073c879c660c73506"
+};

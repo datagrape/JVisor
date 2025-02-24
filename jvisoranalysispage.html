@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JVisor Analysis</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+        body {
+            background-color: #f4f6f9;
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1);
+            margin: auto;
+            position: relative;
+        }
+        .download {
+            background: #7c1c3b;
+            color: white;
+            padding: 14px 22px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            transition: 0.3s;
+        }
+        .download:hover {
+            background: #e01149;
+        }
+        .chart-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 25px;
+            margin: 40px 0;
+        }
+        .chart-box {
+            flex: 1;
+            min-width: 280px;
+            max-width: 320px;
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.15);
+            position: relative;
+        }
+        .chart-box canvas {
+            position: relative;
+            z-index: 1;
+        }
+        .chart-box .chart-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 20px;
+            font-weight: bold;
+            color: black;
+        }
+        .journals {
+            margin-top: 50px;
+        }
+        .journal-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .journal-table th, .journal-table td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        .journal-table th {
+            background-color: #7c1c3b;
+            color: white;
+            font-size: 16px;
+        }
+        .journal-table a {
+            color: #e01149;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .journal-table a:hover {
+            text-decoration: underline;
+        }
+
+        .journal-table tr:hover {
+            background-color: #ffe0b2;
+            transform: scale(1.01);
+        }
+</style>
+</head>
+<body>
+<div class="container">
+<button class="download" onclick="downloadReport()">Download Detailed Report</button>
+<h1>JVisor | Your Article Analysis 📑</h1>
+<h3>Scanned 43,525 abstracts on PubMed. 📑</h3>
+<h4>Sample Research Paper 📖</h4>
+<div class="chart-container">
+<div class="chart-box">
+<canvas id="innovationChart"></canvas>
+<div class="chart-text" id="innovationText">80%</div>
+<div>Innovation Quotient 🚀</div>
+</div>
+<div class="chart-box">
+<canvas id="clinicalChart"></canvas>
+<div class="chart-text" id="clinicalText">90%</div>
+<div>Clinical Practice Value 🏥</div>
+</div>
+<div class="chart-box">
+<canvas id="similarityChart"></canvas>
+<div class="chart-text" id="similarityText">40%</div>
+<div>Similarity Index 🔍</div>
+</div>
+</div>
+<div class="journals">
+<h2>Recommended Journals 📚</h2>
+<table class="journal-table">
+<thead>
+<tr>
+<th>Journal Name</th>
+<th>Publisher</th>
+<th>Publishing Date</th>
+<th>Journal Link</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Diabetes Research and Clinical Practice</td>
+<td>Elsevier</td>
+<td>Jan 2024</td>
+<td><a href="#">See Guidelines & Submit</a></td>
+</tr>
+<tr>
+<td>Diabetes Therapy</td>
+<td>Springer</td>
+<td>Feb 2024</td>
+<td><a href="#">See Guidelines & Submit</a></td>
+</tr>
+<tr>
+<td>Diabetes, Obesity, and Metabolism</td>
+<td>Wiley</td>
+<td>Mar 2024</td>
+<td><a href="#">See Guidelines & Submit</a></td>
+</tr>
+<tr>
+<td>International Journal of Endocrinology</td>
+<td>Hindawi</td>
+<td>Apr 2024</td>
+<td><a href="#">See Guidelines & Submit</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<script>
+        function downloadReport() {
+            alert("Downloading Report...");
+        }
+
+        function createChart(id, value, color, textId) {
+            new Chart(document.getElementById(id), {
+                type: 'doughnut',
+                data: {
+                    labels: ["Score", "Remaining"],
+                    datasets: [{
+                        data: [value, 100 - value],
+                        backgroundColor: [color, "#ddd"]
+                    }]
+                },
+                options: {
+                    animation: {
+                        animateScale: true,
+                        animateRotate: true
+                    },
+                    plugins: {
+                        legend: { display: true },
+                        tooltip: { enabled: true }
+                    }
+                    , responsive: true, cutout: "75%",
+                    hover: {
+                        animationDuration: 500 // Makes it pop on hover
+                    }
+                } 
+                
+            });
+            document.getElementById(textId).innerText = value + "%";
+        }
+
+        createChart("innovationChart", 80, "#002147", "innovationText");
+        createChart("clinicalChart", 90, "#28a745", "clinicalText");
+        createChart("similarityChart", 40, "#e01149", "similarityText");
+</script>
+</body>
+</html>

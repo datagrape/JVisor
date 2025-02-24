@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup | JVisor</title>
+    <style>
+        /* Full-page styling with background image */
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: url('high_res_image.jpg') no-repeat center center/cover;
+            background-size: cover;
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            position: relative;
+        }
+
+        /* Background overlay for better readability */
+        body::before {
+            /*content: "";*/
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.5);
+            z-index: -1;
+        }
+
+        /* 🔹 Transparent Logo Box */
+        .logo-container {
+            position: absolute;
+            top: 20px;
+            left: 30px;
+            padding: 10px 20px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.2); /* ✅ Transparent background */
+            backdrop-filter: blur(5px); /* ✅ Adds slight blur for clarity */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* ✅ Soft shadow */
+        }
+
+        .logo-container img {
+            height: 80px;
+            display: block;
+        }
+
+        /* Main signup container */
+        .container {
+            background: rgba(255, 255, 255, 0.85); /* Slight transparency */
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 800px;
+            max-width: 90%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Left section - Signup Form */
+        .left {
+            width: 50%;
+            padding: 20px;
+        }
+
+        h2 {
+            color: #a8642d;
+            font-size: 26px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        p {
+            color: #7c1c3b;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        /* Input fields and button styling */
+        .input-box {
+            position: relative;
+            width: 100%;
+            margin: 10px 0;
+        }
+
+        input, button {
+            width: 100%;
+            height: 50px;
+            padding: 12px;
+            border: 2px solid #e01149;
+            border-radius: 8px;
+            font-size: 16px;
+            outline: none;
+            transition: 0.3s;
+            display: block;
+            box-sizing: border-box;
+        }
+
+        input:focus {
+            border-color: #e01149;
+            box-shadow: 0px 0px 10px rgba(168, 100, 45, 0.4);
+        }
+
+        /* Password eye icon */
+        .eye-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #a8642d;
+        }
+
+        /* Signup button */
+        button {
+            background: #7c1c3b;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            transition: 0.3s;
+            text-align: center;
+        }
+
+        button:hover {
+            background: #e01149;
+        }
+
+        /* Links */
+        a {
+            color: #a8642d;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Right section - Illustration */
+        .right {
+            width: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .right img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+    <script>
+        function togglePassword() {
+            let passwordInput = document.getElementById("password");
+            let icon = document.getElementById("eye-icon");
+
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                icon.textContent = "👁";
+            } else {
+                passwordInput.type = "password";
+                icon.textContent = "👁‍🗨";
+            }
+        }
+
+        function signup() {
+            let userID = document.getElementById("userID").value;
+            let password = document.getElementById("password").value;
+
+            if (userID && password) {
+                if (localStorage.getItem(userID)) {
+                    alert("User ID already exists! Please use a different ID.");
+                } else {
+                    localStorage.setItem(userID, password);
+                    alert("Signup successful! Redirecting to login...");
+                    window.location.href = "login.html";
+                }
+            } else {
+                alert("Please fill in both fields.");
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <!-- 🔹 Logo Box with Transparency -->
+    <!--<div class="logo-container">
+        <img src="http://sigmamozak.com/wp-content/uploads/2024/08/Sigmmaza-logo.png" alt="SigmaMozak Logo">
+    </div>-->
+
+    <div class="container">
+        <!-- Left Section (Signup Form) -->
+        <div class="left">
+            <h2><span style="color:black">Welcome to </span><span style="color:#7c1c3b">J</span><span style= "color:black">Visor</span></h2>
+            <p>Create your account to get started</p>
+
+            <div class="input-box">
+                <input type="text" id="userID" placeholder="Enter User ID" required>
+            </div>
+
+            <div class="input-box">
+                <input type="password" id="password" placeholder="Enter Password" required>
+                <span class="eye-icon" id="eye-icon" onclick="togglePassword()">👁‍🗨</span>
+            </div>
+
+            <div class="input-box">
+                <button onclick="signup()">Signup</button>
+            </div>
+
+            <p>Already have an account? <a href="login.html"><span style="color:#7c1c3b">Login</span></a></p>
+        </div>
+
+        <!-- Right Section (Illustration) -->
+        <div class="right">
+            <img src="https://static.vecteezy.com/system/resources/previews/007/131/883/non_2x/person-explaining-business-graph-and-chart-a-flat-illustration-of-data-presentation-vector.jpg" alt="">
+        </div>
+    </div>
+
+</body>
+</html>
